@@ -5,7 +5,7 @@ const initState =
     {
       id: 1, // ID của công việc
       name: "Learn React", // Tên công việc
-      completed: false, // Trạng thái hoàn thành
+      completed: true, // Trạng thái hoàn thành
       priority: "High", // Mức độ ưu tiên
     },
     {
@@ -27,10 +27,15 @@ const todoListReducer = (state = initState, action) => {
   switch (action.type) {
     case "todoList/add": {
       // Nếu action.type là 'todoList/add'
-      return {
-        ...state, // Giữ nguyên toàn bộ state cũ
-        todoList: [...state.todoList, action.payload], // Thêm công việc mới vào danh sách công việc
-      };
+      return [...state, action.payload]; // Thêm công việc mới vào danh sách công việc
+    }
+    case "todoList/toggleTodoStatus": {
+      // Nếu action.type là 'todoList/toggleTodoStatus'
+      return state.map((todo) =>
+        todo.id === action.payload
+          ? { ...todo, completed: !todo.completed }
+          : todo
+      ); // Đảo trạng thái hoàn thành của công việc
     }
     default:
       return state;

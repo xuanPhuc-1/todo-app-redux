@@ -14,6 +14,20 @@ const filterReducer = (state = initState, action) => {
         search: action.payload, // Cập nhật bộ lọc tìm kiếm
       };
     }
+    case "filter/statusChange": {
+      // Nếu action.type là 'filter/statusChange'
+      return {
+        ...state, // Giữ nguyên toàn bộ bộ lọc cũ
+        status: action.payload, // Cập nhật bộ lọc trạng thái
+      };
+    }
+    case "filter/prioritiesChange": {
+      // Nếu action.type là 'filter/prioritiesChange'
+      return {
+        ...state, // Giữ nguyên toàn bộ bộ lọc cũ
+        priorities: action.payload, // Cập nhật bộ lọc mức độ ưu tiên
+      };
+    }
     default:
       return state;
   }
